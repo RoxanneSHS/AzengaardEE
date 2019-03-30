@@ -1,0 +1,18 @@
+IF
+Entered([ANYONE])
+Global("JC_ExitPresent","GLOBAL",0)
+THEN
+RESPONSE #100
+FadeToColor([20.0],0)
+PlaySound("EFF_M28")
+Wait(1)
+SaveGame(0)
+ActionOverride(Player1,LeaveAreaLUAPanic("AR02JC","",[951.1125],6))
+ActionOverride(Player1,LeaveAreaLUA("AR02JC","",[951.1125],6))
+ActionOverride(Player2,LeaveAreaLUA("AR02JC","",[944.1125],6))
+ActionOverride(Player3,LeaveAreaLUA("AR02JC","",[958.1125],6))
+ActionOverride(Player4,LeaveAreaLUA("AR02JC","",[951.1115],6))
+ActionOverride(Player5,LeaveAreaLUA("AR02JC","",[944.1115],6))
+ActionOverride(Player6,LeaveAreaLUA("AR02JC","",[958.1115],6))
+SetGlobal("JC_ExitPresent","GLOBAL",1)
+END

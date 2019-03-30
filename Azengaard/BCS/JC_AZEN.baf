@@ -1,0 +1,102 @@
+IF
+See(NearestEnemyOf(Myself))
+HasItem("POTN14",Myself)
+THEN
+RESPONSE #100
+UseItem("POTN14",Myself)
+ForceSpell(NearestEnemyOf(Myself),WIZARD_PIERCE_MAGIC)
+SetGlobal("MyBehave","LOCALS",1)
+END
+
+IF
+Global("MyBehave","LOCALS",1)
+See(NearestEnemyOf(Myself))
+THEN
+RESPONSE #50
+ForceSpell(Myself,WIZARD_TIME_STOP)
+ForceSpell(FourthNearestEnemyOf(Myself),WIZARD_AGANNAZAR_SCORCHER)
+AttackOneRound(NearestEnemyOf(Myself))
+ForceSpell(ThirdNearestEnemyOf(Myself),WIZARD_AGANNAZAR_SCORCHER)
+AttackOneRound(NearestEnemyOf(Myself))
+AttackOneRound(NearestEnemyOf(Myself))
+SetGlobal("MyBehave","LOCALS",2)
+RESPONSE #50
+ForceSpell(Myself,WIZARD_TIME_STOP)
+ForceSpell(FourthNearestEnemyOf(Myself),WIZARD_SLOW)
+AttackOneRound(NearestEnemyOf(Myself))
+AttackOneRound(NearestEnemyOf(Myself))
+AttackOneRound(NearestEnemyOf(Myself))
+SetGlobal("MyBehave","LOCALS",2)
+END
+
+IF
+Global("MyBehave","LOCALS",2)
+See(NearestEnemyOf(Myself))
+THEN
+RESPONSE #50
+ForceSpell(SecondNearestEnemyOf(Myself),WIZARD_PIERCE_MAGIC)
+AttackOneRound(NearestEnemyOf(Myself))
+AttackOneRound(NearestEnemyOf(Myself))
+SetGlobal("MyBehave","LOCALS",3)
+RESPONSE #50
+AttackOneRound(NearestEnemyOf(Myself))
+ForceSpell(SecondNearestEnemyOf(Myself),WIZARD_BREACH)
+AttackOneRound(NearestEnemyOf(Myself))
+SetGlobal("MyBehave","LOCALS",3)
+END
+
+IF
+Global("MyBehave","LOCALS",3)
+See(NearestEnemyOf(Myself))
+THEN
+RESPONSE #50
+ForceSpell(SecondNearestEnemyOf(Myself),WIZARD_MAGIC_MISSILE)
+AttackOneRound(NearestEnemyOf(Myself))
+AttackOneRound(NearestEnemyOf(Myself))
+AttackOneRound(NearestEnemyOf(Myself))
+SetGlobal("MyBehave","LOCALS",1)
+RESPONSE #50
+AttackOneRound(NearestEnemyOf(Myself))
+SetGlobal("MyBehave","LOCALS",4)
+END
+
+IF
+Global("MyBehave","LOCALS",4)
+See(NearestEnemyOf(Myself))
+THEN
+RESPONSE #33
+ForceSpell(SecondNearestEnemyOf(Myself),WIZARD_MAGIC_MISSILE)
+AttackOneRound(NearestEnemyOf(Myself))
+AttackOneRound(NearestEnemyOf(Myself))
+SetGlobal("MyBehave","LOCALS",1)
+RESPONSE #33
+ForceSpell(SecondNearestEnemyOf(Myself),WIZARD_SUN_FIRE)
+AttackOneRound(NearestEnemyOf(Myself))
+ForceSpellRES("",Myself)
+AttackOneRound(NearestEnemyOf(Myself))
+SetGlobal("MyBehave","LOCALS",1)
+RESPONSE #33
+ForceSpell(SecondNearestEnemyOf(Myself),WIZARD_SUN_FIRE)
+AttackOneRound(NearestEnemyOf(Myself))
+ForceSpellRES("",Myself)
+AttackOneRound(NearestEnemyOf(Myself))
+SetGlobal("MyBehave","LOCALS",3)
+END
+
+IF
+HPPercentLT(Myself,50)
+HasItem("POTN55",Myself)
+THEN
+RESPONSE #100
+UseItem("POTN55",Myself)
+END
+
+IF
+Global("MyBehave","LOCALS",2)
+HitBy([ANYONE],POISON)
+StateCheck(Myself,STATE_POISONED)
+HasItem("POTN17",Myself)
+THEN
+RESPONSE #100
+UseItem("POTN17",Myself)
+END

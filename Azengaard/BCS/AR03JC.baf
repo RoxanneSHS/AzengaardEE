@@ -1,0 +1,15 @@
+IF
+Global("JC_EnterFuture","GLOBAL",0)
+THEN
+RESPONSE #100
+CreateCreature("JC_AZEN",[410.415],S)
+SetGlobal("JC_EnterFuture","GLOBAL",1)
+TriggerActivation("Tran0602",FALSE)
+END
+
+IF
+Global("AzenChallenge","GLOBAL",2)
+THEN
+RESPONSE #100
+TriggerActivation("Tran0602",TRUE)
+END

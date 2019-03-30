@@ -1,0 +1,63 @@
+@0    = ~Azengaard Encounter~
+@1    = ~Angelo~
+@2    = ~Time Assassin~
+@3    = ~Azengaard~
+@4    = ~Battle Horror~
+@5    = ~Crypt Lich~
+@6    = ~Time Sorceror~
+@7    = ~Sarevok~
+@8    = ~Semaj~
+@9    = ~Tazok~
+@10   = ~Worn Out Boots~
+@11   = ~Boots of the Fox~
+@12   = ~Boots are normally hand-made by cobblers.  Common boots are made by using a form, but good boots are designed for the foot of an individual. 
+
+STATISTICS:
+
+Weight:  4~
+@13   = ~Not much is known of these magical boots except that they came from the northern region of Faerun known as the Spine of the World. It is said that these were acquired by a brave band of adventurers who travelled through the treacherous and windswept mountains in a quest to destroy an ultimate evil.
+
+STATISTICS:
+
+Armor Class: +1 bonus
+Special: +5 bonus to movement rate
+Weight:  3~
+@14   = ~Scimitar~
+@15   = ~Azurenkarath~
+@16   = ~The long, curved, single-edged blade is characteristic of both the sabre and the scimitar, even though their origins lie in different parts of Faerun.  Where as the sabre was intented mainly for horsemen, mainly due to its versatility, the scimitar has a heavier oriental influence.  The "shamshir", as it was originally called, is larger, has a greater curve to it, and is tapered to an elongated, sharp point.  The effect of this is that it is slightly slower but tends to be more effective and deadly in combat.
+
+STATISTICS:
+
+Damage:  1D8
+Damage type:  slashing
+Weight: 4
+Speed Factor: 5
+Proficiency Type: Scimitar/Wakizashi/Ninja-To
+Type:  1-handed
+Requires: 10 Strength
+Not Usable By:
+ Cleric
+ Mage~
+@17   = ~Azurenkarath: "Guardian's Scimitar of Haste" Believed to have been forged before the birth of time itself, Azurenkarath was long thought of only as legend, being in the sacred protection of an elite band known as the Time Guardians. It is said to imbue its wielder with uncanny speed in battle and impart some of its resistance to aging and disease. 
+<CHARNAME> wrested ownership of the coveted blade from the being known as Azengaard in a climatic battle in small teeth pass. 
+
+STATISTICS:
+
+Equipped Abilities:
+	Regenerate 1 hit point every 12 seconds
+	Immunity to disease
+Combat Abilities:
+	With a successful hit, there is a 25% chance that wielder will be hasted for 6 seconds and a 25% chance that the target will be slowed for 10 seconds and the wielder hasted for 6 seconds 
+THAC0: +3 bonus
+Damage:  1D8 +3, +2 acid damage
+Damage type:  slashing
+Weight: 4
+Speed Factor: 1
+Proficiency Type: Scimitar/Wakizashi/Ninja-To
+Type:  1-handed
+Requires: 10 Strength
+Not Usable By:
+ Cleric
+ Mage~
+@18   = ~This mod requires BG2EE or EET~
+@19   = ~Enhanced Trademeet Crypt~

@@ -1,0 +1,8 @@
+IF
+Global("AzenChallenge","GLOBAL",2)
+THEN
+RESPONSE #100
+SetGlobal("AzenChallenge","GLOBAL",3)
+CreateCreature("JC_AZEN",[2210.1450],0)
+Continue()
+END

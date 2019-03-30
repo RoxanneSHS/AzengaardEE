@@ -1,0 +1,346 @@
+BACKUP	~Azengaard/backup~
+//AUTHOR	~erebusant@verizon.net~
+SUPPORT ~http://baldursextendedworld.com/Vanilla_Forums/categories/mod-help~
+
+VERSION	~v6~
+
+AUTO_TRA ~Azengaard/Language/%s/D~
+
+LANGUAGE	~English~
+		~english~
+		~Azengaard/Language/english/setup.tra~
+
+
+BEGIN @0
+REQUIRE_PREDICATE GAME_IS ~eet bg2ee~ @18
+
+COPY	~Azengaard/are~		~override~
+	~Azengaard/portrait~	~override~
+	~Azengaard/sound~	~override~
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME	~shout20.bcs~	THEN BEGIN
+  COMPILE	~Azengaard/bcs/add/shout20.baf~
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME	~ibootfox.bam~	THEN BEGIN
+  COPY	~Azengaard/bam/ibootfox.bam~	~override~
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME	~isw1aze.bam~	THEN BEGIN
+  COPY	~Azengaard/bam/isw1aze.bam~	~override~
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME	~isw1var.bam~	THEN BEGIN
+  COPY	~Azengaard/bam/isw1var.bam~	~override~
+END
+
+COPY_EXISTING	~kpchap01.sto~	~override~
+	ADD_STORE_ITEM ~JC_BT01~ AFTER ~scrl63~ #0 #0 #0 ~IDENTIFIED~ #1
+	ADD_STORE_ITEM ~SW1H06~ AFTER ~JC_BT01~ #0 #0 #0 ~IDENTIFIED~ #1
+
+COPY ~Azengaard/cre/jc_ange.cre~ ~override~
+  SAY NAME1 @1
+  SAY NAME2 @1
+
+COPY ~Azengaard/cre/jc_assn.cre~ ~override~
+  SAY NAME1 @2
+  SAY NAME2 @2
+
+COPY ~Azengaard/cre/jc_azen.cre~ ~override~
+  SAY NAME1 @3
+  SAY NAME2 @3
+
+COPY ~Azengaard/cre/jc_batt.cre~ ~override~
+  SAY NAME1 @4
+  SAY NAME2 @4
+
+COPY ~Azengaard/cre/jc_lich.cre~ ~override~
+  SAY NAME1 @5
+  SAY NAME2 @5
+
+COPY ~Azengaard/cre/jc_mage.cre~ ~override~
+  SAY NAME1 @6
+  SAY NAME2 @6
+
+COPY ~Azengaard/cre/jc_sare.cre~ ~override~
+  SAY NAME1 @7
+  SAY NAME2 @7
+
+COPY ~Azengaard/cre/jc_sema.cre~ ~override~
+  SAY NAME1 @8
+  SAY NAME2 @8
+
+COPY ~Azengaard/cre/jc_tazo.cre~ ~override~
+  SAY NAME1 @9
+  SAY NAME2 @9
+
+COPY ~Azengaard/itm/jc_bt01.itm~ ~override~
+   SAY NAME1 @10
+   SAY NAME2 @11
+   SAY UNIDENTIFIED_DESC @12
+   SAY DESC @13
+
+COPY ~Azengaard/itm/jc_sw01.itm~ ~override~
+   SAY NAME1 @14
+   SAY NAME2 @15
+   SAY UNIDENTIFIED_DESC @16
+   SAY DESC @17
+
+COMPILE ~Azengaard/D~
+
+ADD_JOURNAL @21 USING ~Azengaard/Language/%s/D/JC_Azen.tra~
+
+EXTEND_BOTTOM   ~ar1700.bcs~ ~Azengaard/bcs/ar1700.baf~
+EXTEND_TOP   ~KGenie2.bcs~ ~Azengaard/bcs/Tele02JC.baf~
+
+COMPILE ~Azengaard/bcs/AR02JC.baf~
+COMPILE ~Azengaard/bcs/AR03JC.baf~
+COMPILE ~Azengaard/bcs/JC_AZEN.baf~
+COMPILE ~Azengaard/bcs/JC_BATT.baf~
+
+COPY	~Azengaard/tis~		~override~
+
+BEGIN	@19
+
+COPY_EXISTING	~AR2013.ARE~	~override~
+	READ_LONG 0x54 ~actoroffset~
+	READ_SHORT 0x58 ~actornum~
+	SET ~numsofar~=0
+	SET ~numdeleted~=0
+	WHILE (~%numsofar%~<~%actornum%~) BEGIN //go through each actor, deleting them if they have the wrong CRE name
+		READ_ASCII (~%numsofar%~*0x110 + ~%actoroffset%~+0x80) ~actorname~
+		PATCH_IF 	!(~%actorname%~ STRING_COMPARE_CASE ~SKELET01~ AND
+				~%actorname%~ STRING_COMPARE_CASE ~SKELWA~ AND
+				~%actorname%~ STRING_COMPARE_CASE ~CESKEL01~)
+		THEN BEGIN
+			DELETE_BYTES (~%numsofar%~*0x110 +~%actoroffset%~) 0x110
+			SET ~actornum~=~%actornum%~-1
+			SET ~numsofar~=~%numsofar%~-1
+			SET ~numdeleted~=~%numdeleted%~+1 //count up the number deleted
+		END
+		SET ~numsofar~=~%numsofar%~+1
+	END
+	READ_LONG 0x5c ~offset~	// go through each offset, and if it's larger than the actor offset, decrease it by 0x110 times the number of actors deleted
+	PATCH_IF (~%offset%~>~%actoroffset%~) THEN BEGIN
+		WRITE_LONG 0x5c (~%offset%~-~%numdeleted%~*0x110)
+	END
+	READ_LONG 0x60 ~offset~
+	PATCH_IF (~%offset%~>~%actoroffset%~) THEN BEGIN
+		WRITE_LONG 0x60 (~%offset%~-~%numdeleted%~*0x110)
+	END
+	READ_LONG 0x68 ~offset~
+	PATCH_IF (~%offset%~>~%actoroffset%~) THEN BEGIN
+		WRITE_LONG 0x68 (~%offset%~-~%numdeleted%~*0x110)
+	END
+	READ_LONG 0x70 ~offset~
+	PATCH_IF (~%offset%~>~%actoroffset%~) THEN BEGIN
+		WRITE_LONG 0x70 (~%offset%~-~%numdeleted%~*0x110)
+	END
+	READ_LONG 0x78 ~offset~
+	PATCH_IF (~%offset%~>~%actoroffset%~) THEN BEGIN
+		WRITE_LONG 0x78 (~%offset%~-~%numdeleted%~*0x110)
+	END
+	READ_LONG 0x7c ~offset~
+	PATCH_IF (~%offset%~>~%actoroffset%~) THEN BEGIN
+		WRITE_LONG 0x7c (~%offset%~-~%numdeleted%~*0x110)
+	END
+	READ_LONG 0x84 ~offset~
+	PATCH_IF (~%offset%~>~%actoroffset%~) THEN BEGIN
+		WRITE_LONG 0x84 (~%offset%~-~%numdeleted%~*0x110)
+	END
+	READ_LONG 0x88 ~offset~
+	PATCH_IF (~%offset%~>~%actoroffset%~) THEN BEGIN
+		WRITE_LONG 0x88 (~%offset%~-~%numdeleted%~*0x110)
+	END
+	READ_LONG 0xa0 ~offset~
+	PATCH_IF (~%offset%~>~%actoroffset%~) THEN BEGIN
+		WRITE_LONG 0xa0 (~%offset%~-~%numdeleted%~*0x110)
+	END
+	READ_LONG 0xa8 ~offset~
+	PATCH_IF (~%offset%~>~%actoroffset%~) THEN BEGIN
+		WRITE_LONG 0xa8 (~%offset%~-~%numdeleted%~*0x110)
+	END
+	READ_LONG 0xb0 ~offset~
+	PATCH_IF (~%offset%~>~%actoroffset%~) THEN BEGIN
+		WRITE_LONG 0xb0 (~%offset%~-~%numdeleted%~*0x110)
+	END
+	READ_LONG 0xb8 ~offset~
+	PATCH_IF (~%offset%~>~%actoroffset%~) THEN BEGIN
+		WRITE_LONG 0xb8 (~%offset%~-~%numdeleted%~*0x110)
+	END
+	READ_LONG 0xbc ~offset~
+	PATCH_IF (~%offset%~>~%actoroffset%~) THEN BEGIN
+		WRITE_LONG 0xbc (~%offset%~-~%numdeleted%~*0x110)
+	END
+	READ_LONG 0xc0 ~offset~
+	PATCH_IF (~%offset%~>~%actoroffset%~) THEN BEGIN
+		WRITE_LONG 0xc0 (~%offset%~-~%numdeleted%~*0x110)
+	END
+	READ_LONG 0xc4 ~offset~
+	PATCH_IF (~%offset%~>~%actoroffset%~) THEN BEGIN
+		WRITE_LONG 0xc4 (~%offset%~-~%numdeleted%~*0x110)
+	END
+	WRITE_SHORT 0x58 ~actornum~ //write in the new number of actors
+
+ BUT_ONLY_IF_IT_CHANGES  //********************************************************  ~AR2013.are~
+
+COPY_EXISTING ~AR2013.ARE~ ~override~
+ READ_LONG  0x54  "actors_offset"
+ READ_SHORT 0x58  "actors_num"
+ READ_SHORT 0x5a  "infotrig_num"
+ READ_LONG  0x5c  "infotrig_offset"
+ READ_LONG  0x60  "spawns_offset"
+ READ_LONG  0x64  "spawns_num"
+ READ_LONG  0x68  "entrances_offset"
+ READ_LONG  0x6c  "entrances_num"
+ READ_LONG  0x70  "cont_offset"
+ READ_SHORT 0x74  "cont_num"
+ READ_SHORT 0x76  "items_num"
+ READ_LONG  0x78  "items_offset"
+ READ_LONG  0x7c  "vert_offset"
+ READ_SHORT 0x80  "vert_num"
+ READ_SHORT 0x82  "amb_num"
+ READ_LONG  0x84  "amb_offset"
+ READ_LONG  0x88  "vars_offset"
+ READ_LONG  0x8c  "vars_num"
+ READ_LONG  0xa0  "expbmp_offset"
+ READ_LONG  0xa4  "doors_num"
+ READ_LONG  0xa8  "doors_offset"
+ READ_LONG  0xac  "anim_num"
+ READ_LONG  0xb0  "anim_offset"
+ READ_LONG  0xb4  "tiled_num"
+ READ_LONG  0xb8  "tiled_offset"
+ READ_LONG  0xbc  "songs_offset"
+ READ_LONG  0xc0  "rest_spawns_offset"
+ READ_LONG  0xc4  "automap_offset"
+ READ_LONG  0xc8  "automap_num"
+
+ SET info_1=1
+ FOR( cnt=0; cnt<"%actors_num%"; cnt=cnt+1 ) BEGIN  //actors loop
+   READ_ASCII ("%actors_offset%"+0x110*cnt)       "actor_name" (10)
+   PATCH_IF (("%actor_name%" STRING_COMPARE_CASE "Crypt Lich")=0) BEGIN  //if already exists
+     info_1=0
+   END
+ END
+
+ PATCH_IF (info_1=1) BEGIN             //adding new actors  *******************************
+   SET offset = ("%actors_offset%"+0x110*"%actors_num%")
+   INSERT_BYTES offset 0x110
+   WRITE_ASCII offset ~Crypt Lich~
+   WRITE_SHORT (offset+0x20) 664          //X
+   WRITE_SHORT (offset+0x22) 422          //Y
+   WRITE_SHORT (offset+0x24) 664          //destination X
+   WRITE_SHORT (offset+0x26) 422          //destination Y
+   WRITE_LONG  (offset+0x28) 1            //visible
+   WRITE_BYTE  (offset+0x30) 0x03         //unknown
+   WRITE_BYTE  (offset+0x31) 0x64         //unknown
+   WRITE_LONG  (offset+0x34) 0            //orientation
+   WRITE_LONG  (offset+0x38) 0xffffffff   //unknown
+   WRITE_LONG  (offset+0x40) 0xffffffff   //schedule
+   WRITE_ASCII (offset+0x80) ~JC_LICH~    //creature
+   INSERT_BYTES offset 0x110
+   WRITE_ASCII offset ~Greater Mummy~
+   WRITE_SHORT (offset+0x20) 573          //X
+   WRITE_SHORT (offset+0x22) 361          //Y
+   WRITE_SHORT (offset+0x24) 573          //destination X
+   WRITE_SHORT (offset+0x26) 361          //destination Y
+   WRITE_LONG  (offset+0x28) 1            //visible
+   WRITE_BYTE  (offset+0x30) 0x03         //unknown
+   WRITE_BYTE  (offset+0x31) 0x64         //unknown
+   WRITE_LONG  (offset+0x34) 0            //orientation
+   WRITE_LONG  (offset+0x38) 0xffffffff   //unknown
+   WRITE_LONG  (offset+0x40) 0xffffffff   //schedule
+   WRITE_ASCII (offset+0x80) ~MUMGRE01~   //creature
+   INSERT_BYTES offset 0x110
+   WRITE_ASCII offset ~Skeleton Warrior~
+   WRITE_SHORT (offset+0x20) 360          //X
+   WRITE_SHORT (offset+0x22) 335          //Y
+   WRITE_SHORT (offset+0x24) 360          //destination X
+   WRITE_SHORT (offset+0x26) 335          //destination Y
+   WRITE_LONG  (offset+0x28) 1            //visible
+   WRITE_BYTE  (offset+0x30) 0x03         //unknown
+   WRITE_BYTE  (offset+0x31) 0x64         //unknown
+   WRITE_LONG  (offset+0x34) 0            //orientation
+   WRITE_LONG  (offset+0x38) 0xffffffff   //unknown
+   WRITE_LONG  (offset+0x40) 0xffffffff   //schedule
+   WRITE_ASCII (offset+0x80) ~CESKEL01~   //creature
+   INSERT_BYTES offset 0x110
+   WRITE_ASCII offset ~Skeleton Warrior~
+   WRITE_SHORT (offset+0x20) 436          //X
+   WRITE_SHORT (offset+0x22) 288          //Y
+   WRITE_SHORT (offset+0x24) 436          //destination X
+   WRITE_SHORT (offset+0x26) 288          //destination Y
+   WRITE_LONG  (offset+0x28) 1            //visible
+   WRITE_BYTE  (offset+0x30) 0x03         //unknown
+   WRITE_BYTE  (offset+0x31) 0x64         //unknown
+   WRITE_LONG  (offset+0x34) 0            //orientation
+   WRITE_LONG  (offset+0x38) 0xffffffff   //unknown
+   WRITE_LONG  (offset+0x40) 0xffffffff   //schedule
+   WRITE_ASCII (offset+0x80) ~CESKEL01~   //creature
+   SET "actors_num"="%actors_num%"+4
+   WRITE_SHORT 0x58  "%actors_num%"
+ END
+
+ SET "info_ext"=0x110*4
+ PATCH_IF ("%infotrig_offset%">="%actors_offset%") BEGIN
+   "infotrig_offset"="%infotrig_offset%"+"%info_ext%"
+   WRITE_LONG  0x5c "%infotrig_offset%"
+ END
+ PATCH_IF ("%spawns_offset%">="%actors_offset%") BEGIN
+   "spawns_offset"="%spawns_offset%"+"%info_ext%"
+   WRITE_LONG  0x60  "%spawns_offset%"
+ END
+ PATCH_IF ("%entrances_offset%">="%actors_offset%") BEGIN
+   "entrances_offset"="%entrances_offset%"+"%info_ext%"
+   WRITE_LONG  0x68  "%entrances_offset%"
+ END
+ PATCH_IF ("%cont_offset%">="%actors_offset%") BEGIN
+   "cont_offset"="%cont_offset%"+"%info_ext%"
+   WRITE_LONG  0x70  "%cont_offset%"
+ END
+ PATCH_IF ("%items_offset%">="%actors_offset%") BEGIN
+   "items_offset"="%items_offset%"+"%info_ext%"
+   WRITE_LONG  0x78  "%items_offset%"
+ END
+ PATCH_IF ("%vert_offset%">="%actors_offset%") BEGIN
+   "vert_offset"="%vert_offset%"+"%info_ext%"
+   WRITE_LONG  0x7c  "%vert_offset%"
+ END
+ PATCH_IF ("%amb_offset%">="%actors_offset%") BEGIN
+   "amb_offset"="%amb_offset%"+"%info_ext%"
+   WRITE_LONG  0x84  "%amb_offset%"
+ END
+ PATCH_IF ("%vars_offset%">="%actors_offset%") BEGIN
+   "vars_offset"="%vars_offset%"+"%info_ext%"
+   WRITE_LONG  0x88  "%vars_offset%"
+ END
+ PATCH_IF ("%expbmp_offset%">="%actors_offset%") BEGIN
+   "expbmp_offset"="%expbmp_offset%"+"%info_ext%"
+   WRITE_LONG  0xa0  "%expbmp_offset%"
+ END
+ PATCH_IF ("%doors_offset%">="%actors_offset%") BEGIN
+   "doors_offset"="%doors_offset%"+"%info_ext%"
+   WRITE_LONG  0xa8  "%doors_offset%"
+ END
+ PATCH_IF ("%anim_offset%">="%actors_offset%") BEGIN
+   "anim_offset"="%anim_offset%"+"%info_ext%"
+   WRITE_LONG  0xb0  "%anim_offset%"
+ END
+ PATCH_IF ("%tiled_offset%">="%actors_offset%") BEGIN
+   "tiled_offset"="%tiled_offset%"+"%info_ext%"
+   WRITE_LONG  0xb8  "%tiled_offset%"
+ END
+ PATCH_IF ("%songs_offset%">="%actors_offset%") BEGIN
+   "songs_offset"="%songs_offset%"+"%info_ext%"
+   WRITE_LONG  0xbc  "%songs_offset%"
+ END
+ PATCH_IF ("%rest_spawns_offset%">="%actors_offset%") BEGIN
+   "rest_spawns_offset"="%rest_spawns_offset%"+"%info_ext%"
+   WRITE_LONG  0xc0  "%rest_spawns_offset%"
+ END
+ PATCH_IF ("%automap_offset%">="%actors_offset%") BEGIN
+   "automap_offset"="%automap_offset%"+"%info_ext%"
+   WRITE_LONG  0xc4  "%automap_offset%"
+ END
+ BUT_ONLY_IF_IT_CHANGES  //********************************************************  ~AR2013.are~
+

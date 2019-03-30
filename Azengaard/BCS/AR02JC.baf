@@ -1,0 +1,20 @@
+IF
+Global("JC_EnterPast","GLOBAL",0)
+THEN
+RESPONSE #100
+CreateCreature("JC_AZEN",[900.1000],S)
+CreateCreature("JC_SARE",[581.437],S)
+SetGlobal("JC_EnterPast","GLOBAL",1)
+SetGlobal("AzenChallenge","GLOBAL",0)
+TriggerActivation("Tran03JC",FALSE)
+END
+
+IF
+Dead("JC_ANGE")
+Dead("JC_SARE")
+Dead("JC_SEMA")
+Dead("JC_TAZO")
+THEN
+RESPONSE #100
+TriggerActivation("Tran03JC",TRUE)
+END
