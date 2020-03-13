@@ -1,0 +1,10 @@
+IF
+AreaCheck("ar2013")
+InActiveArea("JC_Lich")  
+HasItem("Misc8L","JC_lich")
+PartyHasItem("Misc8L")
+HasItem("Misc8L",Myself)
+THEN
+RESPONSE #100
+DestroyItem("Misc8L")
+END

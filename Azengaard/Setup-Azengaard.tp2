@@ -97,6 +97,7 @@ COMPILE ~Azengaard/bcs/AR02JC.baf~
 COMPILE ~Azengaard/bcs/AR03JC.baf~
 COMPILE ~Azengaard/bcs/JC_AZEN.baf~
 COMPILE ~Azengaard/bcs/JC_BATT.baf~
+EXTEND_TOP ~skelcler.bcs~ ~Azengaard/bcs/skelcler.baf~
 
 COPY	~Azengaard/tis~		~override~
 
