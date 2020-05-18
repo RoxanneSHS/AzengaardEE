@@ -2,13 +2,17 @@ BACKUP	~Azengaard/backup~
 //AUTHOR	~erebusant@verizon.net~
 SUPPORT ~http://baldursextendedworld.com/Vanilla_Forums/categories/mod-help~
 
-VERSION	~v6~
+VERSION	~v7~
 
 AUTO_TRA ~Azengaard/Language/%s/D~
 
 LANGUAGE	~English~
 		~english~
 		~Azengaard/Language/english/setup.tra~
+
+LANGUAGE	~Russian (update by Serdrick)~
+		~russian~
+		~Azengaard/Language/russian/setup.tra~
 
 
 BEGIN @0
