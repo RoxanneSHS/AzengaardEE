@@ -1,0 +1,57 @@
+@0  = ~Azengaard Zusammentreffen~ 
+@1  = ~Angelo~
+@2  = ~Zeitmeuchler~ 
+@3  = ~Azengaard~
+@4  = ~Kampfgräuel~ 
+@5  = ~Kyptaleichnam~
+@6  = ~Zeitzauberer~
+@7  = ~Sarevok~ 
+@8  = ~Semaj~
+@9  = ~Tazok~ 
+@10 = ~Abgetragene Stiefel~
+@11 = ~Stiefel des Fuchses~
+@12 = ~Stiefel werden normalerweise von einem Schuster handgefertigt.  Gewöhnliche Stiefel werden nach einem Muster gefertigt aber gute Stiefel sind individuell dem Fuß angepasst. 
+
+EIGENSCHAFTEN:
+
+Gewicht:  4~ 
+@13 = ~Nicht viel ist über diese magischen Stiefel bekannt, nur das sie aus der nördlichsten Region Faeruns kommen welche als Grat der Welt bekannt ist. Es wird erzählt das dieses Schuhwerk von einer tapferen Gruppe Abenteurer erworben wurde welche durch die heimtückischen und windgepeitschten Berge zog um ein Höheres Böse zu besiegen.
+
+EIGENSCHAFTEN:
+
+Rüstungsklasse: +1 Bonus
+Speziell: +5 Bonus zur Bewegungsrate
+Gewicht:  3~
+@14 = ~Krummsäbel~ 
+@15 = ~Azurenkarath~
+@16 = ~Diese lange, geschwungene, einzigartig geschärfte Klinge vereint die Eigenschaften von Säbel und Krummsäbel, auch wenn deren Wurzel in verschiedenen Teilen Faeruns liegen. Der Säbel dient größtenteils Reitern, hauptsächlich wegen seiner Vielseitigkeit. Der Krummsäbel hingegen besitzt einen starken orientalischen Einfluss. Der "Shamshir" wie er ursprünglich genannt wurde besitzt eine ausgeprägtere Krümmung und eine verlängerte scharfe Spitze. Das Ergebnis ist das er ein Bisschen langsamer zu führen ist aber er im Kampf effektiver und tödlicher zu sein scheint.
+
+EIGENSCHAFTEN:
+
+Schaden:  1W8
+Schadensart:  Klingenwaffe
+Gewicht: 4
+Geschwindigkeit: 5
+Waffenfertigkeit: Krummsäbel/Wakizashi/Ninja-To
+Waffentyp:  einhändig
+Benötigt: 10 Stärke~
+@17 = ~"Beschützer Krummsäbel der Hast" 
+Man nimmt an das diese Klinge vor der Geburt der Zeit selbst geschmiedet wurde und viele denken das Schwert sein nur eine Legende welche sich in den Händen einer Elite Gruppe ,die unter dem Namen Wächter der Zeit bekannst ist, befindet. Es wird gesagt das Schwert würde seinen Träger mit unglaublicher Geschwindigkeit im Kampf belegen und ihn gegen Krankheiten schützen. 
+
+EIGENSCHAFTEN:
+
+Besondere Fähigkeiten:
+	Regeneriert 1 einen Trefferpunkt alle 12 Sekunden
+	Immunität gegen Krankheiten
+Eigenschaften im Kampf:
+	Mit einem gelungenen Treffer besteht eine 25% Chance dass der Träger für 6 Sekunden von Hast befallen wird und eine 25% Chance dass der Gegner verlangsamt wird und der Träger für 6 Sekunden von Hast befallen wird
+ETW0: +3 Bonus
+Schaden:  1W8 +3, +2 Gift Schaden
+Schadensart:  Klingenwaffe
+Gewicht: 4
+Geschwindigkeit: 1
+Waffenfertigkeit: Krummsäbel/Wakizashi/Ninja-To
+Waffentyp:  einhändig
+Benötigt: 10 Stärke~
+@18   = ~Nur für BG2EE oder EET~
+@19   = ~Verbesserte Handelstreff Krypta~

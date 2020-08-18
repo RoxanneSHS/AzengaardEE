@@ -34,12 +34,8 @@ Weight: 4
 Speed Factor: 5
 Proficiency Type: Scimitar/Wakizashi/Ninja-To
 Type:  1-handed
-Requires: 10 Strength
-Not Usable By:
- Cleric
- Mage~
+Requires: 10 Strength~
 @17   = ~Azurenkarath: "Guardian's Scimitar of Haste" Believed to have been forged before the birth of time itself, Azurenkarath was long thought of only as legend, being in the sacred protection of an elite band known as the Time Guardians. It is said to imbue its wielder with uncanny speed in battle and impart some of its resistance to aging and disease. 
-<CHARNAME> wrested ownership of the coveted blade from the being known as Azengaard in a climatic battle in small teeth pass. 
 
 STATISTICS:
 
@@ -55,9 +51,6 @@ Weight: 4
 Speed Factor: 1
 Proficiency Type: Scimitar/Wakizashi/Ninja-To
 Type:  1-handed
-Requires: 10 Strength
-Not Usable By:
- Cleric
- Mage~
+Requires: 10 Strength~
 @18   = ~This mod requires BG2EE or EET~
 @19   = ~Enhanced Trademeet Crypt~
