@@ -3,7 +3,7 @@
 @2    = ~Who is this master you speak of?~
 @3    = ~I? I am Azengaard, Time Guardian and loyal servant of the master.~ [JC_AZE01]
 @4    = ~Time Guardian? I have not heard of your sort.~
-@5    = ~You have absolutely no idea, do you <CHARNAME>? You will get no answers from me... the master's identity will be revealed to you in time... but not after he has what he needs from you.~ [JC_AZE02]
+@5    = ~You have absolutely no idea, do you, <CHARNAME>? You will get no answers from me... the master's identity will be revealed to you in time... but not after he has what he needs from you.~ [JC_AZE02]
 @6    = ~Who are you?~
 @7    = ~Where have you brought me?~
 @8    = ~Not so perceptive as I had thought you to be, child of Bhaal... as you may have inferred, we are no longer in the 'present'. We are in the past -- your past.~ [JC_AZE03]
